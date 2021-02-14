@@ -52,8 +52,12 @@ const selectItem = (event, img) => {
   if (item === -1) {
     sliders.push(img);
   } else {
-    alert('Hey, Already added !')
+
+    sliders = sliders.map(x => x != img);
+    // alert('Hey, Already added !')
+    element.classList.remove("added")
   }
+
 }
 var timer
 const createSlider = () => {
@@ -76,7 +80,9 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value && 1000;
+  var duration = document.getElementById('duration').value || 1000;
+  if (duration < 0) {duration = duration * -1 };
+  console.log(duration);
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
